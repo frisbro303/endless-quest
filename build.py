@@ -18,15 +18,7 @@ POSTS = Path("posts")
 PAGES = Path("pages")
 THEME = Path("theme")
 OUT = Path("_site")
-FONTS = ("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1"
-         "&family=JetBrains+Mono:wght@400;500"
-         "&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap")
-
-MOON = ('<svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 '
-        '7 7 0 0 0 21 12.79z"/></svg>')
-SUN = ('<svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 '
-       '18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 '
-       '5.64l1.42-1.42"/></svg>')
+FONTS = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap"
 
 
 def entry_point(folder):
@@ -123,15 +115,17 @@ def theme_links(home):
 
 
 def site_header(home, pages, active=None):
-    links = [f'<a href="{home}#posts">Writing</a>']
+    """The site name only appears on the blog; standalone pages like the CV stand on their own."""
+    links = [f'<a href="{home}#posts">writing</a>']
     for page in pages:
         current = ' aria-current="page"' if page["slug"] == active else ""
         links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
-    return (f'<header class="site-header"><a class="logo" href="{home}">'
-            f'<img src="{home}theme/icon.png" alt="" width="30" height="30">'
-            f'<span>{SITE_NAME}</span></a><nav class="site-nav">{"".join(links)}'
-            f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">'
-            f'{MOON}{SUN}</button></nav></header>')
+    logo = "" if active else (f'<a class="logo" href="{home}">'
+                              f'<img src="{home}theme/icon.png" alt="" width="24" height="24">'
+                              f'<span>{SITE_NAME}</span></a>')
+    return (f'<header class="site-header">{logo}<nav class="site-nav">{"".join(links)}'
+            '<button id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>'
+            '</nav></header>')
 
 
 def site_footer():
@@ -149,7 +143,8 @@ def write_html(entry, home, pages, meta, bottom="", active=None):
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
-    entry["output"].write_text(f"{before}</article>{bottom}</main>{site_footer()}</body>{after}")
+    footer = "" if active else site_footer()
+    entry["output"].write_text(f"{before}</article>{bottom}</main>{footer}</body>{after}")
 
 
 def post_nav(newer, older):
@@ -160,27 +155,26 @@ def post_nav(newer, older):
                 f'<span>{label}</span>{post["title"]}</a>')
     if not newer and not older:
         return ""
-    return f'<nav class="post-nav">{link(newer, "← Newer", "newer")}{link(older, "Older →", "older")}</nav>'
+    return f'<nav class="post-nav">{link(newer, "newer", "newer")}{link(older, "older", "older")}</nav>'
 
 
 def write_index(posts, pages):
     links = "".join(f'<a href="{url}">{label}</a>' for label, url in LINKS.items())
-    first, _, last = SITE_NAME.rpartition(" ")
-    hero = (f'<section class="hero"><div class="hero-text"><h1>{first} <em>{last}</em></h1>'
+    hero = (f'<section class="hero"><div class="hero-text"><h1>{SITE_NAME}</h1>'
             f'<p>{INTRO}</p><div class="links">{links}</div></div>'
             '<img class="hopf" src="theme/logo.png" alt="" width="540" height="539"></section>')
     rows = []
-    for number, post in zip(range(len(posts), 0, -1), posts):
+    for post in posts:
         description = f'<p>{post["description"]}</p>' if post["description"] else ""
-        rows.append(f'<a class="row" href="posts/{post["slug"]}/"><span class="num">{number:03}</span>'
-                    f'<div class="row-text"><h3>{post["title"]}</h3>{description}</div>'
-                    f'{post_meta(post)}</a>')
+        rows.append(f'<a class="row" href="posts/{post["slug"]}/">'
+                    f'<time datetime="{post["date"]}">{post["date"]}</time>'
+                    f'<div><h3>{post["title"]}</h3>{description}</div></a>')
     (OUT / "index.html").write_text(
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
         f'<body class="home">{site_header("./", pages)}{hero}<main>'
-        f'<h2 class="label" id="posts">Writing</h2>{"".join(rows)}</main>{site_footer()}</body></html>'
+        f'<h2 id="posts">Writing</h2>{"".join(rows)}</main>{site_footer()}</body></html>'
     )
 
 
@@ -207,7 +201,7 @@ def main():
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
 
     for page in pages:
-        meta = f'<div class="meta"><a href="{page["slug"]}.pdf">Download PDF ↓</a></div>'
+        meta = f'<div class="meta"><a href="{page["slug"]}.pdf">download pdf</a></div>'
         write_html(page, "../", pages, meta, active=page["slug"])
     for i, post in enumerate(posts):
         newer = posts[i - 1] if i > 0 else None

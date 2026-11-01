@@ -3,7 +3,8 @@
   var root = document.documentElement;
   var saved = null;
   try { saved = localStorage.getItem("theme"); } catch (e) {}
-  root.dataset.theme = saved === "light" ? "light" : "dark";
+  var dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "dark" : "light";
 
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("theme-toggle").addEventListener("click", function () {

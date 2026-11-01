@@ -1,7 +1,13 @@
 #set document(title: "Felix Granum")
+#set page(margin: (x: 2.2cm, y: 1.8cm))
+#set text(size: 10.5pt)
 
-// The website adds its own heading; the PDF needs one on the page.
-#context if target() == "paged" { title() }
+// The website adds its own heading and a photo; the PDF only needs the heading.
+#context if target() == "paged" {
+  title()
+} else {
+  html.elem("img", attrs: (src: "photo.jpg", alt: "Felix Granum", class: "portrait"))
+}
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me]\; #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu]
 
@@ -34,6 +40,10 @@ BSc, Mathematics; 2023 - 2026; University of Southern Denmark.
 == Preprints
 
 - Felix Risbro Hjerrild\*, Shan Shan, Doug Boyer, Ingrid Daubechies. 2024; signDNE: A python package for ariaDNE and its sign-oriented extension; arXiv preprint. #link("https://arxiv.org/abs/2409.05549")[arXiv:2409.05549]\; implementation: #link("https://github.com/frisbro303/SignDNE")[github.com/frisbro303/SignDNE]\; (\*Published under my former name).
+
+== Posters
+
+- Felix Granum, Sofus Laubel, Shira Faigenbaum-Golovin, Doug M. Boyer, Shan Shan, Ingrid Daubechies. 2026; Learning the Geometry of Shape Families: A Fiber Bundle Framework; NITMB.
 
 = Teaching
 
