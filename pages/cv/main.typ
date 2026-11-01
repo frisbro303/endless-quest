@@ -7,7 +7,7 @@
   title()
 } else {
   html.elem("img", attrs: (src: "photo.jpg", alt: "Felix Granum", class: "portrait"))
-  [I'm an aspiring researcher interested in _mathematics_ and _computing_.]
+  [I'm an aspiring researcher interested in _mathematics_ and _computing_, especially _shape analysis_.]
   parbreak()
 }
 
