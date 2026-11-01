@@ -12,8 +12,8 @@ from pathlib import Path
 SITE_NAME = "Endless Quest"
 AUTHOR = "Felix Granum"
 INTRO = "This is where I write out ideas and thoughts."
-NAV_LABELS = {"cv": "About/CV"}
-LINKS = {"Email": "mailto:felix.granum@pm.me", "GitHub": "https://github.com/frisbro303"}
+NAV_LABELS = {"cv": "about/cv"}
+LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
 
 POSTS = Path("posts")
 PAGES = Path("pages")
@@ -109,7 +109,7 @@ def compile_html(slug, path, source, target):
 
 
 def nav_label(page):
-    return NAV_LABELS.get(page["slug"], page["path"].stem.replace("-", " ").capitalize())
+    return NAV_LABELS.get(page["slug"], page["path"].stem.replace("-", " ").lower())
 
 
 def theme_links(home):
@@ -124,7 +124,7 @@ def theme_links(home):
 def site_header(home, pages):
     logo = (f'<a class="logo" href="{home}"><span>{SITE_NAME}</span>'
             f'<img src="{home}theme/icon.png" alt="" width="36" height="36"></a>')
-    links = [f'<a href="{home}">Blog</a>']
+    links = [f'<a href="{home}">blog</a>']
     links += [f'<a href="{home}{page["slug"]}/">{nav_label(page)}</a>' for page in pages]
     return (f'<header class="site-header">{logo}<nav class="site-nav">{"".join(links)}</nav>'
             f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
@@ -160,7 +160,7 @@ def post_nav(newer, older):
                 f'<span>{label}</span>{post["title"]}</a>')
     if not newer and not older:
         return ""
-    return f'<nav class="post-nav">{link(newer, "Newer", "newer")}{link(older, "Older", "older")}</nav>'
+    return f'<nav class="post-nav">{link(newer, "newer", "newer")}{link(older, "older", "older")}</nav>'
 
 
 def write_index(posts, pages):
@@ -176,7 +176,7 @@ def write_index(posts, pages):
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
         f'<body class="home"><div class="page">{site_header("./", pages)}{hero}<main>'
-        f'<h2>Blog</h2>{"".join(rows)}</main>{site_footer()}</div></body></html>'
+        f'<h2>blog</h2>{"".join(rows)}</main>{site_footer()}</div></body></html>'
     )
 
 
