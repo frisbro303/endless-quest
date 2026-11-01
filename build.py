@@ -121,11 +121,9 @@ def theme_links(home):
             f'<script src="{home}theme/theme.js"></script>')
 
 
-def site_header(home, active=None):
-    """The site name only appears on the blog; standalone pages like the CV stand on their own."""
-    logo = "" if active else (f'<a class="logo" href="{home}">'
-                              f'<span>{SITE_NAME}</span>'
-                              f'<img src="{home}theme/icon.png" alt="" width="36" height="36"></a>')
+def site_header(home):
+    logo = (f'<a class="logo" href="{home}"><span>{SITE_NAME}</span>'
+            f'<img src="{home}theme/icon.png" alt="" width="36" height="36"></a>')
     return (f'<header class="site-header">{logo}'
             f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
             '</header>')
@@ -148,7 +146,7 @@ def post_meta(post):
 def write_html(entry, home, pages, meta="", bottom="", active=None):
     # Posts get a generated title; standalone pages lay out their own headings.
     heading = "" if active else f'<div class="post-header"><h1>{entry["title"]}</h1>{meta}</div>'
-    top = f'<div class="page">{site_header(home, active)}<main>{heading}<article>'
+    top = f'<div class="page">{site_header(home)}<main>{heading}<article>'
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
