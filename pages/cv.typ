@@ -2,8 +2,16 @@
 #set page(margin: (x: 2.2cm, y: 1.8cm))
 #set text(size: 10.5pt)
 
-// The website adds its own centred title, so only the PDF needs one here.
-#context if target() == "paged" { align(center, title()) }
+// The website opens with a short about before the CV; the PDF is just the CV.
+#context if target() == "paged" {
+  align(center, title())
+} else {
+  [I'm an aspiring researcher interested in _mathematics_ and _computing_, especially _shape analysis_. I write up ideas and experiments on #link("../")[my blog].]
+  parbreak()
+  [My CV is available below or #html.elem("a", attrs: (href: "cv.pdf", download: ""))[as a PDF].]
+  parbreak()
+  html.elem("h1")[Curriculum Vitae]
+}
 
 = Felix Granum
 

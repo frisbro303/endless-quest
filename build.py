@@ -12,7 +12,8 @@ from pathlib import Path
 SITE_NAME = "Endless Quest"
 INTRO = "This is where I write up ideas, experiments, and things I find worth sharing."
 NAV_LABELS = {"cv": "about/cv"}
-LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
+LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303",
+         "linkedin": "https://www.linkedin.com/in/felix-granum-986a7b37a/"}
 
 POSTS = Path("posts")
 PAGES = Path("pages")
@@ -135,6 +136,7 @@ def site_footer(home, pages, active=None):
     for page in pages:
         current = ' aria-current="page"' if page["slug"] == active else ""
         links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
+    links += [f'<a href="{url}">{label}</a>' for label, url in LINKS.items()]
     return f'<footer class="site-footer"><nav class="site-nav">{"".join(links)}</nav></footer>'
 
 
@@ -143,11 +145,10 @@ def post_meta(post):
             f' · {post["minutes"]} min read</div>')
 
 
-def write_html(entry, home, pages, meta="", bottom="", active=None, above=""):
-    header_class = "page-header" if active else "post-header"
-    top = (f'<div class="page">{site_header(home, active)}<main>{above}'
-           f'<div class="{header_class}"><h1>{entry["title"]}</h1>'
-           f'{meta}</div><article>')
+def write_html(entry, home, pages, meta="", bottom="", active=None):
+    # Posts get a generated title; standalone pages lay out their own headings.
+    heading = "" if active else f'<div class="post-header"><h1>{entry["title"]}</h1>{meta}</div>'
+    top = f'<div class="page">{site_header(home, active)}<main>{heading}<article>'
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
@@ -167,8 +168,7 @@ def post_nav(newer, older):
 
 
 def write_index(posts, pages):
-    links = "".join(f'<a href="{url}">{label}</a>' for label, url in LINKS.items())
-    hero = f'<section class="hero"><p>{INTRO}</p><div class="links">{links}</div></section>'
+    hero = f'<section class="hero"><p>{INTRO}</p></section>'
     rows = []
     for post in posts:
         description = f'<p>{post["description"]}</p>' if post["description"] else ""
@@ -207,8 +207,7 @@ def main():
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
 
     for page in pages:
-        download = f'<div class="meta"><a href="{page["slug"]}.pdf" download>download pdf</a></div>'
-        write_html(page, "../", pages, active=page["slug"], above=download)
+        write_html(page, "../", pages, active=page["slug"])
     for i, post in enumerate(posts):
         newer = posts[i - 1] if i > 0 else None
         older = posts[i + 1] if i + 1 < len(posts) else None
