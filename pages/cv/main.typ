@@ -2,10 +2,11 @@
 #set page(margin: (x: 2.2cm, y: 1.8cm))
 #set text(size: 10.5pt)
 
-// The website adds its own heading, plus a photo and a short intro; the PDF only needs the heading.
+// The website adds its own page title and splits into About and CV; the PDF is just the CV.
 #context if target() == "paged" {
   title()
 } else {
+  html.elem("h2")[About]
   html.elem("img", attrs: (src: "photo.jpg", alt: "Felix Granum", class: "portrait"))
   [I'm an aspiring researcher interested in _mathematics_ and _computing_, especially _shape analysis_.]
   parbreak()
@@ -16,6 +17,16 @@ Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me]\; #link("mailto:f
 GitHub: #link("https://github.com/frisbro303")[github.com/frisbro303]
 
 ORCID: #link("https://orcid.org/0009-0007-3158-0553")[0009-0007-3158-0553]
+
+#context if target() == "html" { html.elem("h2")[CV] }
+
+// On the website, the CV's sections sit one level below the CV heading.
+#show: body => context if target() == "html" {
+  set heading(offset: 1)
+  body
+} else {
+  body
+}
 
 = Current Position
 
