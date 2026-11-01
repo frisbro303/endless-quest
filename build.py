@@ -18,7 +18,8 @@ POSTS = Path("posts")
 PAGES = Path("pages")
 THEME = Path("theme")
 OUT = Path("_site")
-FONTS = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap"
+FONTS = ("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono"
+         "&family=Libertinus+Serif:ital,wght@0,400;0,600;1,400&display=swap")
 
 MOON = ('<svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 '
         '7 7 0 0 0 21 12.79z"/></svg>')
@@ -127,7 +128,7 @@ def site_header(home, pages, active=None):
         current = ' aria-current="page"' if page["slug"] == active else ""
         links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
     logo = "" if active else (f'<a class="logo" href="{home}">'
-                              f'<img src="{home}theme/icon.png" alt="" width="24" height="24">'
+                              f'<img src="{home}theme/icon.png" alt="" width="20" height="20">'
                               f'<span>{SITE_NAME}</span></a>')
     return (f'<header class="site-header">{logo}<nav class="site-nav">{"".join(links)}'
             f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
