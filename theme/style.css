@@ -1,21 +1,23 @@
 :root {
   color-scheme: light;
-  --bg: #fcfcfb;
-  --text: #2a2a28;
-  --muted: #71706b;
-  --line: #e2e1dc;
-  --panel: #f2f1ed;
+  --bg: #f8f6f0;
+  --text: #2e2c28;
+  --muted: #736f66;
+  --line: #e0dcd1;
+  --panel: #efece3;
+  --link: #2f5d8a;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --width: 640px;
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #1b1b1a;
-  --text: #c9c8c2;
-  --muted: #8d8c86;
-  --line: #333331;
-  --panel: #252523;
+  --bg: #1a1d21;
+  --text: #cfd2d6;
+  --muted: #8b9096;
+  --line: #2f343a;
+  --panel: #252a30;
+  --link: #8fb3d9;
 }
 
 * { box-sizing: border-box; }
@@ -35,8 +37,8 @@ body {
 ::selection { background: var(--line); }
 :focus-visible { outline: 1px solid var(--muted); outline-offset: 2px; }
 
-a { color: inherit; text-decoration: underline; text-decoration-color: var(--muted); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-a:hover { text-decoration-color: currentColor; }
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration: none; }
 
 h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3; }
 
@@ -61,7 +63,7 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3;
   font: 13px var(--mono);
 }
 
-.logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.logo { display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; }
 .logo:hover { text-decoration: underline; text-underline-offset: 2px; }
 .logo img { display: block; }
 .home .logo { visibility: hidden; }
@@ -100,6 +102,7 @@ main { flex: 1; padding-top: 12px; padding-bottom: 56px; }
   padding-bottom: 28px;
   color: var(--muted);
   font: 12px var(--mono);
+  text-align: center;
 }
 
 .meta { color: var(--muted); font: 12px/1.6 var(--mono); }
@@ -128,6 +131,7 @@ main { flex: 1; padding-top: 12px; padding-bottom: 56px; }
   gap: 16px;
   align-items: baseline;
   padding: 6px 0;
+  color: inherit;
   text-decoration: none;
 }
 
@@ -158,7 +162,7 @@ figure { margin: 24px 0; overflow-x: auto; }
 figure > img, figure > svg { margin: 0 auto; }
 figcaption { margin-top: 6px; color: var(--muted); font-size: 16px; text-align: center; }
 
-article img.portrait { float: right; width: 104px; height: 104px; margin: 0 0 10px 20px; }
+article img.portrait { float: right; width: 104px; margin: 0 0 10px 20px; }
 
 /* Plots and transparent images are drawn for a light page. */
 [data-theme="dark"] article img:not(.portrait), [data-theme="dark"] article svg { background: #fff; }
@@ -172,7 +176,7 @@ pre {
   margin: 0 0 14px;
   padding: 12px 14px;
   overflow-x: auto;
-  background: #f2f1ed;
+  background: #efece3;
   font-size: 18px;
   line-height: 1.5;
 }
@@ -180,7 +184,7 @@ pre {
 pre code { padding: 0; background: none; color: #2a2a28; }
 
 /* Typst hard-codes syntax colours for light backgrounds; this flips lightness but keeps hue. */
-[data-theme="dark"] pre { filter: invert(0.88) hue-rotate(180deg); }
+[data-theme="dark"] pre { background: #e2e6ec; filter: invert(0.88) hue-rotate(180deg); }
 
 table { display: block; max-width: 100%; margin: 16px 0; overflow-x: auto; border-collapse: collapse; }
 th, td { padding: 3px 16px 3px 0; border-bottom: 1px solid var(--line); text-align: left; }
@@ -195,5 +199,5 @@ th, td { padding: 3px 16px 3px 0; border-bottom: 1px solid var(--line); text-ali
   .hero { grid-template-columns: minmax(0, 1fr) 64px; gap: 16px; }
   .logo span { display: none; }
   .row { grid-template-columns: 1fr; gap: 0; }
-  article img.portrait { width: 84px; height: 84px; margin-left: 14px; }
+  article img.portrait { width: 84px; margin-left: 14px; }
 }

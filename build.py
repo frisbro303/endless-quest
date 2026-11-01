@@ -108,8 +108,7 @@ def compile_html(slug, path, source, target):
 
 
 def nav_label(page):
-    stem = page["path"].stem
-    return stem.upper() if len(stem) <= 3 else stem.replace("-", " ").capitalize()
+    return page["path"].stem.replace("-", " ").lower()
 
 
 def theme_links(home):
@@ -181,7 +180,7 @@ def write_index(posts, pages):
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
         f'<body class="home">{site_header("./", pages)}{hero}<main>'
-        f'<h2 id="posts">Writing</h2>{"".join(rows)}</main>{site_footer()}</body></html>'
+        f'<h2 id="posts">writing</h2>{"".join(rows)}</main>{site_footer()}</body></html>'
     )
 
 

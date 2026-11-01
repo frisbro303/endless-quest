@@ -41,10 +41,6 @@ BSc, Mathematics; 2023 - 2026; University of Southern Denmark.
 
 - Felix Risbro Hjerrild\*, Shan Shan, Doug Boyer, Ingrid Daubechies. 2024; signDNE: A python package for ariaDNE and its sign-oriented extension; arXiv preprint. #link("https://arxiv.org/abs/2409.05549")[arXiv:2409.05549]\; implementation: #link("https://github.com/frisbro303/SignDNE")[github.com/frisbro303/SignDNE]\; (\*Published under my former name).
 
-== Posters
-
-- Felix Granum, Sofus Laubel, Shira Faigenbaum-Golovin, Doug M. Boyer, Shan Shan, Ingrid Daubechies. 2026; Learning the Geometry of Shape Families: A Fiber Bundle Framework; NITMB.
-
 = Teaching
 
 - TA in Calculus for Mathematics; MM536, MM558; Fall Semester 2025; University of Southern Denmark.
