@@ -11,6 +11,7 @@ from pathlib import Path
 
 SITE_NAME = "Endless Quest"
 INTRO = "This is where I write up ideas, experiments, and things I find worth sharing."
+NAV_LABELS = {"cv": "about/cv"}
 LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
 
 POSTS = Path("posts")
@@ -107,7 +108,7 @@ def compile_html(slug, path, source, target):
 
 
 def nav_label(page):
-    return page["path"].stem.replace("-", " ").lower()
+    return NAV_LABELS.get(page["slug"], page["path"].stem.replace("-", " ").lower())
 
 
 def theme_links(home):
