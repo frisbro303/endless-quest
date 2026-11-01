@@ -42,7 +42,7 @@ BSc, Mathematics; 2023 - 2026; University of Southern Denmark.
 
 == Posters
 
-- Felix Granum et al. 2026; Learning the Geometry of Shape Families: A Fiber Bundle Framework; NITMB.
+- Felix Granum et al. 2026; Learning the Geometry of Shape Families: A Fiber Bundle Framework; NITMB workshop #link("https://www.nitmb.org/event/representing-and-learning-morphology-and-shape-dynamics-from-biological-data/")[Representing and Learning Morphology and Shape Dynamics from Biological Data], Chicago, October 2026.
 
 = Teaching
 
