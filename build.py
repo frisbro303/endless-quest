@@ -119,22 +119,23 @@ def theme_links(home):
             f'<script src="{home}theme/theme.js"></script>')
 
 
-def site_header(home, pages, active=None):
+def site_header(home, active=None):
     """The site name only appears on the blog; standalone pages like the CV stand on their own."""
+    logo = "" if active else (f'<a class="logo" href="{home}">'
+                              f'<img src="{home}theme/icon.png" alt="" width="20" height="20">'
+                              f'<span>{SITE_NAME}</span></a>')
+    return (f'<header class="site-header">{logo}'
+            f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
+            '</header>')
+
+
+def site_footer(home, pages, active=None):
     links = [f'<a href="{home}">writing</a>']
     for page in pages:
         current = ' aria-current="page"' if page["slug"] == active else ""
         links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
-    logo = "" if active else (f'<a class="logo" href="{home}">'
-                              f'<img src="{home}theme/icon.png" alt="" width="20" height="20">'
-                              f'<span>{SITE_NAME}</span></a>')
-    return (f'<header class="site-header">{logo}<nav class="site-nav">{"".join(links)}'
-            f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
-            '</nav></header>')
-
-
-def site_footer():
-    return f'<footer class="site-footer">{SITE_NAME}</footer>'
+    label = "" if active else f"<div>{SITE_NAME}</div>"
+    return f'<footer class="site-footer">{label}<nav class="site-nav">{"".join(links)}</nav></footer>'
 
 
 def post_meta(post):
@@ -143,13 +144,13 @@ def post_meta(post):
 
 
 def write_html(entry, home, pages, meta="", bottom="", active=None, above=""):
-    top = (f'<div class="page">{site_header(home, pages, active)}<main>{above}'
+    top = (f'<div class="page">{site_header(home, active)}<main>{above}'
            f'<div class="post-header"><h1>{entry["title"]}</h1>'
            f'{meta}</div><article>')
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
-    footer = "" if active else site_footer()
+    footer = site_footer(home, pages, active)
     entry["output"].write_text(f"{before}</article>{bottom}</main>{footer}</div></body>{after}")
 
 
@@ -179,8 +180,8 @@ def write_index(posts, pages):
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
-        f'<body class="home"><div class="page">{site_header("./", pages)}{hero}<main>'
-        f'<h2>writing</h2>{"".join(rows)}</main>{site_footer()}</div></body></html>'
+        f'<body class="home"><div class="page">{site_header("./")}{hero}<main>'
+        f'<h2>writing</h2>{"".join(rows)}</main>{site_footer("./", pages)}</div></body></html>'
     )
 
 
