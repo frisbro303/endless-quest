@@ -6,6 +6,7 @@
 #context if target() == "paged" {
   align(center, title())
 } else {
+  html.elem("h1")[About]
   [I'm an aspiring researcher interested in _mathematics_ and _computing_ with a focus on _shape analysis_. I write out ideas and thoughts on #link("../")[my blog].]
   parbreak()
   [My CV is available below or #html.elem("a", attrs: (href: "cv.pdf", download: ""))[as a PDF].]

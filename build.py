@@ -10,6 +10,7 @@ import subprocess
 from pathlib import Path
 
 SITE_NAME = "Endless Quest"
+AUTHOR = "Felix Granum"
 INTRO = "This is where I write out ideas and thoughts."
 NAV_LABELS = {"cv": "about/cv"}
 LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
@@ -134,8 +135,9 @@ def site_footer(home, pages):
     """The one footer used by every page; only the relative path to the site root varies."""
     links = [f'<a href="{home}">writing</a>']
     links += [f'<a href="{home}{page["slug"]}/">{nav_label(page)}</a>' for page in pages]
-    links += [f'<a href="{url}">{label}</a>' for label, url in LINKS.items()]
-    return f'<footer class="site-footer"><nav class="site-nav">{"".join(links)}</nav></footer>'
+    contact = "".join(f'<a href="{url}">{label}</a>' for label, url in LINKS.items())
+    return (f'<footer class="site-footer"><nav class="site-nav">{"".join(links)}</nav>'
+            f'<div class="site-nav site-contact"><span>{AUTHOR}</span>{contact}</div></footer>')
 
 
 def post_meta(post):
