@@ -1,0 +1,26 @@
+name: Publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # post dates come from git history
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: 0.15.0
+      - run: python3 build.py
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site/
+      - uses: actions/deploy-pages@v5
