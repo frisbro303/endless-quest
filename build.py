@@ -208,7 +208,7 @@ def main():
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
 
     for page in pages:
-        meta = f'<div class="meta"><a href="{page["slug"]}.pdf">download pdf</a></div>'
+        meta = f'<div class="meta"><a href="{page["slug"]}.pdf" download>download pdf</a></div>'
         write_html(page, "../", pages, meta, active=page["slug"])
     for i, post in enumerate(posts):
         newer = posts[i - 1] if i > 0 else None
