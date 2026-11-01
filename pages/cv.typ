@@ -3,12 +3,7 @@
 #set text(size: 10.5pt)
 
 // The website adds its own heading, so only the PDF needs one here.
-#context if target() == "paged" {
-  place(top + right, image("photo.jpg", width: 2.4cm))
-  title()
-} else {
-  html.elem("img", attrs: (src: "photo.jpg", alt: "Felix Granum", class: "portrait"))
-}
+#context if target() == "paged" { title() }
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me]\; #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu]
 

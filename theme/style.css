@@ -166,10 +166,8 @@ figure { margin: 24px 0; overflow-x: auto; }
 figure > img, figure > svg { margin: 0 auto; }
 figcaption { margin-top: 6px; color: var(--muted); font-size: 16px; text-align: center; }
 
-article img.portrait { float: right; width: 104px; margin: 0 0 10px 20px; }
-
 /* Plots and transparent images are drawn for a light page. */
-[data-theme="dark"] article img:not(.portrait), [data-theme="dark"] article svg { background: #fff; }
+[data-theme="dark"] article img, [data-theme="dark"] article svg { background: #fff; }
 [data-theme="dark"] article svg { padding: 8px; }
 
 math[display="block"] { margin: 16px 0; overflow-x: auto; }
@@ -204,5 +202,4 @@ th, td { padding: 3px 16px 3px 0; border-bottom: 1px solid var(--line); text-ali
   .hero { grid-template-columns: minmax(0, 1fr) 64px; gap: 16px; }
   .logo span { display: none; }
   .row { grid-template-columns: 1fr; gap: 0; }
-  article img.portrait { width: 84px; margin-left: 14px; }
 }
