@@ -134,8 +134,7 @@ def site_footer(home, pages, active=None):
     for page in pages:
         current = ' aria-current="page"' if page["slug"] == active else ""
         links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
-    label = "" if active else f"<div>{SITE_NAME}</div>"
-    return f'<footer class="site-footer">{label}<nav class="site-nav">{"".join(links)}</nav></footer>'
+    return f'<footer class="site-footer"><nav class="site-nav">{"".join(links)}</nav></footer>'
 
 
 def post_meta(post):
