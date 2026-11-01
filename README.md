@@ -1,6 +1,6 @@
 # The Endless Quest
 
-Add a post to `posts/` and push to `main`; it is published to [granum.quest](https://granum.quest).
+Add a post to `posts/` and push to `main`; it is published to [frisbro303.github.io/endless-quest](https://frisbro303.github.io/endless-quest/).
 Dragging files or a folder into GitHub's "Upload files" page works too.
 
 - **Single file:** `posts/my-post.typ` becomes `/posts/my-post/`
@@ -18,6 +18,9 @@ Without a title, the file or folder name is used. The date is always the post's 
 
 Non-text content such as shapes or plots needs wrapping to appear in HTML export:
 `#html.frame(rect(...))`. Images work as usual.
+
+The site name, front-page intro and links are at the top of `build.py`; the theme is `style.css`
+and `theme.js`.
 
 Preview locally with `python3 build.py && python3 -m http.server -d _site`. Requires Typst 0.15;
 the version CI uses is pinned in `.github/workflows/publish.yml`.
