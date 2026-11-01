@@ -142,8 +142,8 @@ def post_meta(post):
             f' · {post["minutes"]} min read</div>')
 
 
-def write_html(entry, home, pages, meta, bottom="", active=None):
-    top = (f'<div class="page">{site_header(home, pages, active)}<main>'
+def write_html(entry, home, pages, meta="", bottom="", active=None, above=""):
+    top = (f'<div class="page">{site_header(home, pages, active)}<main>{above}'
            f'<div class="post-header"><h1>{entry["title"]}</h1>'
            f'{meta}</div><article>')
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
@@ -207,8 +207,8 @@ def main():
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
 
     for page in pages:
-        meta = f'<div class="meta"><a href="{page["slug"]}.pdf" download>download pdf</a></div>'
-        write_html(page, "../", pages, meta, active=page["slug"])
+        download = f'<div class="meta"><a href="{page["slug"]}.pdf" download>download pdf</a></div>'
+        write_html(page, "../", pages, active=page["slug"], above=download)
     for i, post in enumerate(posts):
         newer = posts[i - 1] if i > 0 else None
         older = posts[i + 1] if i + 1 < len(posts) else None
