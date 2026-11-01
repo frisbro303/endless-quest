@@ -40,8 +40,8 @@ BSc, Mathematics; 2023 - 2026; University of Southern Denmark.
 - TA in Calculus for Mathematics; MM536, MM558; Fall Semester 2025; University of Southern Denmark.
 - TA in Advanced Linear Algebra; MM562; Spring Semester 2026; University of Southern Denmark.
 
-= Technical Skills
+= Skills/Interests
 
 - Programming: Python; JAX; NumPy; SciPy; Matplotlib.
-- Mathematics: Numerical Analysis; Computational Geometry; Differential Geometry; Gaussian Processes.
+- Mathematics: Numerical Analysis; Computational Geometry; Differential Geometry; Gaussian Processes; Shape Analysis.
 - Tools: LaTeX; Git; Typst; 3D Mesh Processing; Computational Geometry.
