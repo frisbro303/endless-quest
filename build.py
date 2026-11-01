@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 SITE_NAME = "Endless Quest"
-INTRO = ("I'm a researcher interested in <em>mathematics</em> and <em>computing</em>. "
+INTRO = ("I'm an aspiring researcher interested in <em>mathematics</em> and <em>computing</em>. "
          "This blog is where I write up ideas, experiments, and things I find worth sharing.")
 LINKS = {"email": "mailto:felix.granum+quest@pm.me", "github": "https://github.com/frisbro303"}
 
@@ -122,7 +122,7 @@ def theme_links(home):
 
 def site_header(home, pages, active=None):
     """The site name only appears on the blog; standalone pages like the CV stand on their own."""
-    links = [f'<a href="{home}#posts">writing</a>']
+    links = [f'<a href="{home}">writing</a>']
     for page in pages:
         current = ' aria-current="page"' if page["slug"] == active else ""
         links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
@@ -144,13 +144,14 @@ def post_meta(post):
 
 
 def write_html(entry, home, pages, meta, bottom="", active=None):
-    top = (f'{site_header(home, pages, active)}<main><div class="post-header"><h1>{entry["title"]}</h1>'
+    top = (f'<div class="page">{site_header(home, pages, active)}<main>'
+           f'<div class="post-header"><h1>{entry["title"]}</h1>'
            f'{meta}</div><article>')
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
     footer = "" if active else site_footer()
-    entry["output"].write_text(f"{before}</article>{bottom}</main>{footer}</body>{after}")
+    entry["output"].write_text(f"{before}</article>{bottom}</main>{footer}</div></body>{after}")
 
 
 def post_nav(newer, older):
@@ -179,8 +180,8 @@ def write_index(posts, pages):
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
-        f'<body class="home">{site_header("./", pages)}{hero}<main>'
-        f'<h2 id="posts">writing</h2>{"".join(rows)}</main>{site_footer()}</body></html>'
+        f'<body class="home"><div class="page">{site_header("./", pages)}{hero}<main>'
+        f'<h2>writing</h2>{"".join(rows)}</main>{site_footer()}</div></body></html>'
     )
 
 

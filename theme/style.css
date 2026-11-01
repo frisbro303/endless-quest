@@ -1,5 +1,6 @@
 :root {
   color-scheme: light;
+  --outer: #e9e5da;
   --bg: #f8f6f0;
   --text: #2e2c28;
   --muted: #736f66;
@@ -12,6 +13,7 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --outer: #121417;
   --bg: #1a1d21;
   --text: #cfd2d6;
   --muted: #8b9096;
@@ -25,13 +27,21 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   margin: 0;
-  background: var(--bg);
+  background: var(--outer);
   color: var(--text);
   font: 19px/1.55 "Libertinus Serif", "Linux Libertine", Georgia, serif;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: calc(var(--width) + 96px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 24px;
+  background: var(--bg);
 }
 
 ::selection { background: var(--line); }
@@ -44,14 +54,7 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3;
 
 /* Site chrome: the only monospaced text outside of code. */
 
-.site-header, main, .hero, .site-footer {
-  width: 100%;
-  max-width: calc(var(--width) + 48px);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
+.site-header, main, .hero, .site-footer { width: 100%; padding-left: 24px; padding-right: 24px; }
 
 .site-header {
   display: flex;
@@ -82,6 +85,7 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3;
 }
 
 #theme-toggle svg {
+  flex: none;
   width: 15px;
   height: 15px;
   fill: none;
@@ -196,6 +200,7 @@ th, td { padding: 3px 16px 3px 0; border-bottom: 1px solid var(--line); text-ali
 
 @media (max-width: 600px) {
   body { font-size: 18px; }
+  .page { padding: 0; }
   .hero { grid-template-columns: minmax(0, 1fr) 64px; gap: 16px; }
   .logo span { display: none; }
   .row { grid-template-columns: 1fr; gap: 0; }
