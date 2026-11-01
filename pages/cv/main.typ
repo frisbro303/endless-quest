@@ -18,7 +18,10 @@ GitHub: #link("https://github.com/frisbro303")[github.com/frisbro303]
 
 ORCID: #link("https://orcid.org/0009-0007-3158-0553")[0009-0007-3158-0553]
 
-#context if target() == "html" { html.elem("h2")[CV] }
+#context if target() == "html" {
+  html.elem("h2")[CV]
+  html.elem("div", attrs: (class: "meta"), html.elem("a", attrs: (href: "cv.pdf", download: ""))[download pdf])
+}
 
 // On the website, the CV's sections sit one level below the CV heading.
 #show: body => context if target() == "html" {

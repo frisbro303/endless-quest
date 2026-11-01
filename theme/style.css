@@ -110,6 +110,7 @@ main { flex: 1; padding-top: 12px; padding-bottom: 56px; }
 }
 
 .meta { color: var(--muted); font: 12px/1.6 var(--mono); }
+article .meta { margin: -4px 0 12px; }
 
 /* Front page */
 
