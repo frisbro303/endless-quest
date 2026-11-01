@@ -11,7 +11,6 @@ from pathlib import Path
 
 SITE_NAME = "Endless Quest"
 INTRO = "This is where I write up ideas, experiments, and things I find worth sharing."
-NAV_LABELS = {"cv": "about/cv"}
 LINKS = {"email": "mailto:felix.granum+quest@pm.me", "github": "https://github.com/frisbro303"}
 
 POSTS = Path("posts")
@@ -108,7 +107,7 @@ def compile_html(slug, path, source, target):
 
 
 def nav_label(page):
-    return NAV_LABELS.get(page["slug"], page["path"].stem.replace("-", " ").lower())
+    return page["path"].stem.replace("-", " ").lower()
 
 
 def theme_links(home):
@@ -208,7 +207,8 @@ def main():
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
 
     for page in pages:
-        write_html(page, "../", pages, "", active=page["slug"])
+        meta = f'<div class="meta"><a href="{page["slug"]}.pdf" download>download pdf</a></div>'
+        write_html(page, "../", pages, meta, active=page["slug"])
     for i, post in enumerate(posts):
         newer = posts[i - 1] if i > 0 else None
         older = posts[i + 1] if i + 1 < len(posts) else None

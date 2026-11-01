@@ -2,13 +2,12 @@
 #set page(margin: (x: 2.2cm, y: 1.8cm))
 #set text(size: 10.5pt)
 
-// The website adds its own heading, plus a photo and a short intro; the PDF only needs the heading.
+// The website adds its own heading, so only the PDF needs one here.
 #context if target() == "paged" {
+  place(top + right, image("photo.jpg", width: 2.4cm))
   title()
 } else {
   html.elem("img", attrs: (src: "photo.jpg", alt: "Felix Granum", class: "portrait"))
-  [I'm an aspiring researcher interested in _mathematics_ and _computing_, especially _shape analysis_.]
-  parbreak()
 }
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me]\; #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu]
@@ -17,9 +16,6 @@ GitHub: #link("https://github.com/frisbro303")[github.com/frisbro303]
 
 ORCID: #link("https://orcid.org/0009-0007-3158-0553")[0009-0007-3158-0553]
 
-#context if target() == "html" {
-  html.elem("div", attrs: (class: "meta"), html.elem("a", attrs: (href: "cv.pdf", download: ""))[download pdf])
-}
 
 = Current Position
 
