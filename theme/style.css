@@ -157,7 +157,6 @@ main { padding-top: 12px; padding-bottom: 40px; }
 .post-header { margin: 12px 0 28px; }
 .post-header h1 { margin: 0 0 2px; font-size: 26px; font-weight: 400; }
 article h1 { margin: 36px 0 20px; font-size: 26px; font-weight: 400; text-align: center; }
-article h1:first-child { margin-top: 8px; }
 
 article { overflow-wrap: break-word; }
 article h2 { clear: both; margin: 28px 0 8px; font-size: 21px; font-weight: 400; }
