@@ -66,10 +66,17 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3;
   font: 13px var(--mono);
 }
 
-.logo { display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; }
-.logo:hover { text-decoration: underline; text-underline-offset: 2px; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  font: 26px/1.2 "Libertinus Serif", "Linux Libertine", Georgia, serif;
+  text-decoration: none;
+}
+
+.logo:hover span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .logo img { display: block; }
-.home .logo { visibility: hidden; }
 
 .site-nav { display: flex; justify-content: center; gap: 16px; margin-top: 6px; }
 .site-nav a { color: var(--muted); }
@@ -100,7 +107,7 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3;
 #theme-toggle .sun, [data-theme="dark"] #theme-toggle .moon { display: none; }
 [data-theme="dark"] #theme-toggle .sun { display: block; }
 
-main { flex: 1; padding-top: 12px; padding-bottom: 56px; }
+main { padding-top: 12px; padding-bottom: 40px; }
 
 .site-footer {
   padding-top: 20px;
@@ -114,17 +121,8 @@ main { flex: 1; padding-top: 12px; padding-bottom: 56px; }
 
 /* Front page */
 
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 84px;
-  gap: 28px;
-  align-items: start;
-  padding-top: 16px;
-}
-
-.hero h1 { margin: 0 0 10px; font-size: 26px; font-weight: 400; }
+.hero { padding-top: 8px; }
 .hero p { margin: 0; }
-.hopf { display: block; width: 100%; height: auto; }
 .links { display: flex; gap: 16px; margin-top: 10px; }
 
 .home main { padding-top: 28px; }
@@ -149,6 +147,8 @@ main { flex: 1; padding-top: 12px; padding-bottom: 56px; }
 
 .post-header { margin: 12px 0 28px; }
 .post-header h1 { margin: 0 0 2px; font-size: 26px; font-weight: 400; }
+.page-header { margin: 12px 0 28px; text-align: center; }
+.page-header h1 { margin: 0; font-size: 26px; font-weight: 400; }
 
 article { overflow-wrap: break-word; }
 article h2 { clear: both; margin: 28px 0 8px; font-size: 21px; font-weight: 400; }
@@ -200,7 +200,5 @@ th, td { padding: 3px 16px 3px 0; border-bottom: 1px solid var(--line); text-ali
 @media (max-width: 600px) {
   body { font-size: 18px; }
   .page { padding: 0; }
-  .hero { grid-template-columns: minmax(0, 1fr) 64px; gap: 16px; }
-  .logo span { display: none; }
   .row { grid-template-columns: 1fr; gap: 0; }
 }

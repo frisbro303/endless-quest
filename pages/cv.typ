@@ -1,9 +1,11 @@
-#set document(title: "Felix Granum")
+#set document(title: "Curriculum Vitae")
 #set page(margin: (x: 2.2cm, y: 1.8cm))
 #set text(size: 10.5pt)
 
-// The website adds its own heading, so only the PDF needs one here.
-#context if target() == "paged" { title() }
+// The website adds its own centred title, so only the PDF needs one here.
+#context if target() == "paged" { align(center, title()) }
+
+= Felix Granum
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me]\; #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu]
 

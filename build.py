@@ -122,8 +122,8 @@ def theme_links(home):
 def site_header(home, active=None):
     """The site name only appears on the blog; standalone pages like the CV stand on their own."""
     logo = "" if active else (f'<a class="logo" href="{home}">'
-                              f'<img src="{home}theme/icon.png" alt="" width="20" height="20">'
-                              f'<span>{SITE_NAME}</span></a>')
+                              f'<span>{SITE_NAME}</span>'
+                              f'<img src="{home}theme/icon.png" alt="" width="36" height="36"></a>')
     return (f'<header class="site-header">{logo}'
             f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
             '</header>')
@@ -144,8 +144,9 @@ def post_meta(post):
 
 
 def write_html(entry, home, pages, meta="", bottom="", active=None, above=""):
+    header_class = "page-header" if active else "post-header"
     top = (f'<div class="page">{site_header(home, active)}<main>{above}'
-           f'<div class="post-header"><h1>{entry["title"]}</h1>'
+           f'<div class="{header_class}"><h1>{entry["title"]}</h1>'
            f'{meta}</div><article>')
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
@@ -167,9 +168,7 @@ def post_nav(newer, older):
 
 def write_index(posts, pages):
     links = "".join(f'<a href="{url}">{label}</a>' for label, url in LINKS.items())
-    hero = (f'<section class="hero"><div class="hero-text"><h1>{SITE_NAME}</h1>'
-            f'<p>{INTRO}</p><div class="links">{links}</div></div>'
-            '<img class="hopf" src="theme/logo.png" alt="" width="540" height="539"></section>')
+    hero = f'<section class="hero"><p>{INTRO}</p><div class="links">{links}</div></section>'
     rows = []
     for post in posts:
         description = f'<p>{post["description"]}</p>' if post["description"] else ""
