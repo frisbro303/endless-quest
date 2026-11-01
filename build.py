@@ -121,21 +121,20 @@ def theme_links(home):
             f'<script src="{home}theme/theme.js"></script>')
 
 
-def site_header(home):
+def site_header(home, pages):
     logo = (f'<a class="logo" href="{home}"><span>{SITE_NAME}</span>'
             f'<img src="{home}theme/icon.png" alt="" width="36" height="36"></a>')
-    return (f'<header class="site-header">{logo}'
+    links = [f'<a href="{home}">blog</a>']
+    links += [f'<a href="{home}{page["slug"]}/">{nav_label(page)}</a>' for page in pages]
+    return (f'<header class="site-header">{logo}<nav class="site-nav">{"".join(links)}</nav>'
             f'<button id="theme-toggle" type="button" aria-label="Toggle dark mode">{MOON}{SUN}</button>'
             '</header>')
 
 
-def site_footer(home, pages):
-    """The one footer used by every page; only the relative path to the site root varies."""
-    links = [f'<a href="{home}">writing</a>']
-    links += [f'<a href="{home}{page["slug"]}/">{nav_label(page)}</a>' for page in pages]
+def site_footer():
+    """The one footer used by every page: contact details only."""
     contact = "".join(f'<a href="{url}">{label}</a>' for label, url in LINKS.items())
-    return (f'<footer class="site-footer"><nav class="site-nav">{"".join(links)}</nav>'
-            f'<div class="site-nav site-contact"><span>{AUTHOR}</span>{contact}</div></footer>')
+    return f'<footer class="site-footer"><div>{AUTHOR}</div><div class="contact">{contact}</div></footer>'
 
 
 def post_meta(post):
@@ -146,11 +145,11 @@ def post_meta(post):
 def write_html(entry, home, pages, meta="", bottom="", active=None):
     # Posts get a generated title; standalone pages lay out their own headings.
     heading = "" if active else f'<div class="post-header"><h1>{entry["title"]}</h1>{meta}</div>'
-    top = f'<div class="page">{site_header(home)}<main>{heading}<article>'
+    top = f'<div class="page">{site_header(home, pages)}<main>{heading}<article>'
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
-    entry["output"].write_text(f"{before}</article>{bottom}</main>{site_footer(home, pages)}</div></body>{after}")
+    entry["output"].write_text(f"{before}</article>{bottom}</main>{site_footer()}</div></body>{after}")
 
 
 def post_nav(newer, older):
@@ -176,8 +175,8 @@ def write_index(posts, pages):
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
-        f'<body class="home"><div class="page">{site_header("./")}{hero}<main>'
-        f'<h2>writing</h2>{"".join(rows)}</main>{site_footer("./", pages)}</div></body></html>'
+        f'<body class="home"><div class="page">{site_header("./", pages)}{hero}<main>'
+        f'<h2>blog</h2>{"".join(rows)}</main>{site_footer()}</div></body></html>'
     )
 
 
