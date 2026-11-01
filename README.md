@@ -1,4 +1,4 @@
-# The Endless Quest
+# Endless Quest
 
 Add a post to `posts/` and push to `main`; it is published to [frisbro303.github.io/endless-quest](https://frisbro303.github.io/endless-quest/).
 Dragging files or a folder into GitHub's "Upload files" page works too.

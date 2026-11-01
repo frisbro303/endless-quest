@@ -9,10 +9,10 @@ import shutil
 import subprocess
 from pathlib import Path
 
-SITE_NAME = "The Endless Quest"
+SITE_NAME = "Endless Quest"
 INTRO = ("I'm a researcher interested in <em>mathematics</em> and <em>computing</em>. "
          "This blog is where I write up ideas, experiments, and things I find worth sharing.")
-LINKS = {"github": "https://github.com/frisbro303"}
+LINKS = {"email": "mailto:felix.granum+quest@pm.me", "github": "https://github.com/frisbro303"}
 
 POSTS = Path("posts")
 OUT = Path("_site")
@@ -84,8 +84,7 @@ def site_header(home):
 
 
 def site_footer():
-    return ('<footer class="site-footer">'
-            f'{SITE_NAME} · Built with <a href="https://typst.app">Typst</a></footer>')
+    return f'<footer class="site-footer">{SITE_NAME}</footer>'
 
 
 def meta_line(post):

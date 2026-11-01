@@ -91,8 +91,6 @@ main { flex: 1; padding-top: 16px; padding-bottom: 48px; }
   text-align: center;
 }
 
-.site-footer a { color: inherit; }
-
 .meta { color: var(--muted); font-size: 14px; }
 
 /* Front page */
