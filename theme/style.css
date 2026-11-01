@@ -118,8 +118,8 @@ main { padding-top: 24px; padding-bottom: 40px; }
 /* Sits at the end of the page, and at the bottom of the window on short pages. */
 .site-footer {
   margin-top: auto;
-  padding-top: 20px;
-  padding-bottom: 24px;
+  padding-top: 14px;
+  padding-bottom: 16px;
   border-top: 1px solid var(--line);
   font-size: 17px;
   line-height: 1.4;
