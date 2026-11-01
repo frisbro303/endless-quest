@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 SITE_NAME = "Endless Quest"
-INTRO = "This is where I write up ideas, experiments, and things I find worth sharing."
+INTRO = "This is where I write out ideas and thoughts."
 NAV_LABELS = {"cv": "about/cv"}
 LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
 
@@ -130,11 +130,10 @@ def site_header(home, active=None):
             '</header>')
 
 
-def site_footer(home, pages, active=None):
+def site_footer(home, pages):
+    """The one footer used by every page; only the relative path to the site root varies."""
     links = [f'<a href="{home}">writing</a>']
-    for page in pages:
-        current = ' aria-current="page"' if page["slug"] == active else ""
-        links.append(f'<a href="{home}{page["slug"]}/"{current}>{nav_label(page)}</a>')
+    links += [f'<a href="{home}{page["slug"]}/">{nav_label(page)}</a>' for page in pages]
     links += [f'<a href="{url}">{label}</a>' for label, url in LINKS.items()]
     return f'<footer class="site-footer"><nav class="site-nav">{"".join(links)}</nav></footer>'
 
@@ -151,8 +150,7 @@ def write_html(entry, home, pages, meta="", bottom="", active=None):
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
-    footer = site_footer(home, pages, active)
-    entry["output"].write_text(f"{before}</article>{bottom}</main>{footer}</div></body>{after}")
+    entry["output"].write_text(f"{before}</article>{bottom}</main>{site_footer(home, pages)}</div></body>{after}")
 
 
 def post_nav(newer, older):
