@@ -2,11 +2,13 @@
 #set page(margin: (x: 2.2cm, y: 1.8cm))
 #set text(size: 10.5pt)
 
-// The website adds its own heading and a photo; the PDF only needs the heading.
+// The website adds its own heading, plus a photo and a short intro; the PDF only needs the heading.
 #context if target() == "paged" {
   title()
 } else {
   html.elem("img", attrs: (src: "photo.jpg", alt: "Felix Granum", class: "portrait"))
+  [I'm an aspiring researcher interested in _mathematics_ and _computing_.]
+  parbreak()
 }
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me]\; #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu]
