@@ -12,8 +12,7 @@ from pathlib import Path
 SITE_NAME = "Endless Quest"
 INTRO = "This is where I write up ideas, experiments, and things I find worth sharing."
 NAV_LABELS = {"cv": "about/cv"}
-LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303",
-         "linkedin": "https://www.linkedin.com/in/felix-granum-986a7b37a/"}
+LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
 
 POSTS = Path("posts")
 PAGES = Path("pages")
