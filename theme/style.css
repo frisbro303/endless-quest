@@ -56,8 +56,13 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 600; line-height: 1.3;
 
 .site-header, main, .hero, .site-footer { width: 100%; padding-left: 24px; padding-right: 24px; }
 
+/* Stays at the top of the window while the page scrolls behind it. */
 .site-header {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,6 +121,7 @@ main { padding-top: 12px; padding-bottom: 40px; }
 .site-footer {
   position: sticky;
   bottom: 0;
+  z-index: 1;
   margin-top: auto;
   padding-top: 10px;
   padding-bottom: 12px;
