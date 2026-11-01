@@ -6,7 +6,7 @@
 #context if target() == "paged" {
   align(center, title())
 } else {
-  [I'm an aspiring researcher interested in _mathematics_ and _computing_, especially _shape analysis_. I write up ideas and experiments on #link("../")[my blog].]
+  [I'm an aspiring researcher interested in _mathematics_ and _computing_ with a focus on _shape analysis_. I write up ideas and experiments on #link("../")[my blog].]
   parbreak()
   [My CV is available below or #html.elem("a", attrs: (href: "cv.pdf", download: ""))[as a PDF].]
   parbreak()
