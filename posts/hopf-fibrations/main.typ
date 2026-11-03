@@ -6,7 +6,9 @@
 #import "/template.typ": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
 
-The logo image of this website is a visualization of the Hopf fibration. I thought it only right that my first post should be about fiber bundles to give some more intuition for this beautiful object.
+The logo image of this website is a visualization of the Hopf fibration.
+The Hopf fibration is perhaps one of the most famous examples of a fiber bundle.
+I thought it only right that my first post should be about fiber bundles to give some more intuition for this beautiful object.
 
 #themed-gif(
   "figures/Hook",
@@ -14,7 +16,6 @@ The logo image of this website is a visualization of the Hopf fibration. I thoug
 ) <fig:hook>
 
 = Fiber Bundles
-The Hopf fibration is perhaps one of the most famous examples of a fiber bundle.
 A fiber bundle is a manifold that is locally a product space. A familiar example is the cylinder which is formed by gluing an interval to each point in a circle, that is $SS^1 times [-1, 1]$.
 The cylinder is a kind of non-example in that it is not only locally a product space, but in fact globally one. The Möbius band is a more interesting example. Locally it looks like we are doing the same gluing of an interval to a circle, but globally it is not a product. @fig:bundles shows this difference.
 
