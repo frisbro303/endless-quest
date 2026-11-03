@@ -6,9 +6,11 @@
 #context if target() == "paged" {
   align(center, title())
 } else {
-  [I'm an aspiring researcher interested in _mathematics_ and _computing_ with a focus on _shape analysis_. I write out #link("../")[ideas and thoughts] on my blog.]
+  [I'm Felix Granum, an aspiring researcher interested in _mathematics_ and _computing_ with a focus on _shape analysis_. You can read about my thoughts and ideas on my #link("../")[blog].]
   parbreak()
-  [My CV is available below or #html.elem("a", attrs: (href: "cv.pdf", download: ""))[as a PDF].]
+  [You can reach me by #link("mailto:felix.granum@pm.me")[email] or find me on #link("https://github.com/frisbro303")[GitHub].]
+  parbreak()
+  [My CV is available below or in #html.elem("a", attrs: (href: "cv.pdf", download: ""))[PDF form].]
   parbreak()
   html.elem("h1")[Curriculum Vitae]
 }

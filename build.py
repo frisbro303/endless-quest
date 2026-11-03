@@ -10,10 +10,9 @@ import subprocess
 from pathlib import Path
 
 SITE_NAME = "Endless Quest"
-AUTHOR = "Felix Granum"
 INTRO = "This is where I write out ideas and thoughts."
 NAV_LABELS = {"cv": "about/cv"}
-LINKS = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
+PUBLISHED = {"hopf-fibrations": "2026-11-03"}  # dates that override a post's first commit
 
 POSTS = Path("posts")
 PAGES = Path("pages")
@@ -57,12 +56,12 @@ def find_sources(directory):
 
 
 def first_published(path):
-    """The date the post was first committed, or today if it isn't committed yet."""
+    """The time the post was first committed, or now if it isn't committed yet."""
     log = subprocess.run(
-        ["git", "log", "--reverse", "--format=%as", "--", str(path)],
+        ["git", "log", "--reverse", "--format=%aI", "--", str(path)],
         capture_output=True, text=True, check=True,
     ).stdout.split()
-    return log[0] if log else datetime.date.today().isoformat()
+    return datetime.datetime.fromisoformat(log[0]) if log else datetime.datetime.now().astimezone()
 
 
 def search(pattern, page):
@@ -73,7 +72,8 @@ def search(pattern, page):
 def minutes_to_read(page):
     body = page.partition("<body>")[2]
     text = re.sub(r"<svg.*?</svg>|<[^>]+>", " ", body, flags=re.S)
-    return max(1, math.ceil(len(text.split()) / 200))
+    seconds = len(text.split()) * 60 / 140+ 10 * body.count("<svg") + 12 * body.count("<img")
+    return max(1, math.ceil(seconds / 60))
 
 
 def typst_compile(source, output, fmt):
@@ -87,7 +87,7 @@ def typst_compile(source, output, fmt):
 def compile_html(slug, path, source, target):
     """Compile a source into target/index.html, publishing any files that sit next to it."""
     if path.is_dir():
-        shutil.copytree(path, target, ignore=shutil.ignore_patterns("*.typ", ".DS_Store"))
+        shutil.copytree(path, target, ignore=shutil.ignore_patterns("*.typ", "*.py", ".DS_Store"))
     target.mkdir(parents=True, exist_ok=True)
     output = target / "index.html"
     typst_compile(source, output, "html")
@@ -132,9 +132,12 @@ def site_header(home, pages):
 
 
 def site_footer():
-    """The one footer used by every page: contact details only."""
-    contact = "".join(f'<a href="{url}">{label}</a>' for label, url in LINKS.items())
-    return f'<footer class="site-footer"><div>{AUTHOR}</div><div class="contact">{contact}</div></footer>'
+    """The footer on posts and the index: copyright and contact links."""
+    links = {"email": "mailto:felix.granum@pm.me", "github": "https://github.com/frisbro303"}
+    contact = "".join(f'<a href="{url}">{label}</a>' for label, url in links.items())
+    year = datetime.date.today().year
+    return (f'<footer class="site-footer"><div>© {year} Felix Granum</div>'
+            f'<div class="contact">{contact}</div></footer>')
 
 
 def post_meta(post):
@@ -142,25 +145,15 @@ def post_meta(post):
             f' · {post["minutes"]} min read</div>')
 
 
-def write_html(entry, home, pages, meta="", bottom="", active=None):
+def write_html(entry, home, pages, meta="", active=None):
     # Posts get a generated title; standalone pages lay out their own headings.
     heading = "" if active else f'<div class="post-header"><h1>{entry["title"]}</h1>{meta}</div>'
     top = f'<div class="page">{site_header(home, pages)}<main>{heading}<article>'
     page = entry["page"].replace("</head>", f"{theme_links(home)}</head>", 1)
     page = page.replace("<body>", f"<body>{top}", 1)
     before, _, after = page.rpartition("</body>")
-    entry["output"].write_text(f"{before}</article>{bottom}</main>{site_footer()}</div></body>{after}")
-
-
-def post_nav(newer, older):
-    def link(post, label, cls):
-        if not post:
-            return ""
-        return (f'<a class="{cls}" href="../{post["slug"]}/">'
-                f'<span>{label}</span>{post["title"]}</a>')
-    if not newer and not older:
-        return ""
-    return f'<nav class="post-nav">{link(newer, "newer", "newer")}{link(older, "older", "older")}</nav>'
+    footer = "" if active else site_footer()
+    entry["output"].write_text(f"{before}</article></main>{footer}</div></body>{after}")
 
 
 def write_index(posts, pages):
@@ -197,17 +190,18 @@ def main():
     posts = []
     for slug, path, source in find_sources(POSTS):
         post = compile_html(slug, path, source, OUT / "posts" / slug)
-        post["date"] = first_published(path)
+        override = PUBLISHED.get(slug)
+        post["published"] = (datetime.datetime.fromisoformat(override).astimezone() if override
+                             else first_published(path))
+        post["date"] = post["published"].date().isoformat()
         post["minutes"] = minutes_to_read(post["page"])
         posts.append(post)
-    posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
+    posts.sort(key=lambda p: (p["published"], p["slug"]), reverse=True)
 
     for page in pages:
         write_html(page, "../", pages, active=page["slug"])
-    for i, post in enumerate(posts):
-        newer = posts[i - 1] if i > 0 else None
-        older = posts[i + 1] if i + 1 < len(posts) else None
-        write_html(post, "../../", pages, post_meta(post), post_nav(newer, older))
+    for post in posts:
+        write_html(post, "../../", pages, post_meta(post))
     write_index(posts, pages)
     print(f"Built {len(posts)} post(s) and {len(pages)} page(s) into {OUT}/")
 
