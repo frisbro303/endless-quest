@@ -11,7 +11,7 @@
   --accent: #bc5215;
   --surface: #dad8ce;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --width: 640px;
+  --width: 680px;
 }
 
 :root[data-theme="dark"] {
@@ -180,7 +180,6 @@ article strong { font-weight: 600; }
 article img, article svg { max-width: 100%; height: auto; }
 figure { margin: 24px 0; }
 figure img, figure svg { display: block; margin: 0 auto; }
-figure img { cursor: pointer; }
 figcaption { margin-top: 6px; color: var(--muted); font-size: 16px; text-align: center; }
 
 /* Plots and transparent images are drawn for a light page. */
