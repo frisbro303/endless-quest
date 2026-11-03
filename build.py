@@ -10,7 +10,6 @@ import subprocess
 from pathlib import Path
 
 SITE_NAME = "Endless Quest"
-INTRO = "This is where I write out ideas and thoughts."
 NAV_LABELS = {"cv": "about/cv"}
 PUBLISHED = {"hopf-fibrations": "2026-11-03"}  # dates that override a post's first commit
 
@@ -157,7 +156,6 @@ def write_html(entry, home, pages, meta="", active=None):
 
 
 def write_index(posts, pages):
-    hero = f'<section class="hero"><p>{INTRO}</p></section>'
     rows = []
     for post in posts:
         description = f'<p>{post["description"]}</p>' if post["description"] else ""
@@ -168,7 +166,7 @@ def write_index(posts, pages):
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{SITE_NAME}</title>{theme_links("")}</head>'
-        f'<body class="home"><div class="page">{site_header("./", pages)}{hero}<main>'
+        f'<body class="home"><div class="page">{site_header("./", pages)}<main>'
         f'<h2>blog</h2>{"".join(rows)}</main>{site_footer()}</div></body></html>'
     )
 

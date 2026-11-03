@@ -1,6 +1,6 @@
 #set document(
   title: "Fiber Bundles and the Hopf Fibration",
-  description: "I discuss fiber bundles, geometric objects with the beautiful Hopf fibration as a special case.",
+  description: "I discuss fiber bundles, topological objects with the beautiful Hopf fibration as a special case.",
 )
 
 #import "/template.typ": *
