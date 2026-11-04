@@ -199,6 +199,7 @@ article .diagram svg, [data-theme="dark"] article .diagram svg { margin: 0 auto;
 .thm > :last-child { margin-bottom: 0; }
 
 math[display="block"] { margin: 16px 0; overflow-x: auto; }
+.narrow-only { display: none; }
 
 code { padding: 1px 3px; background: var(--panel); font: 0.78em var(--mono); }
 
@@ -228,6 +229,8 @@ th, td { padding: 3px 16px 3px 0; border-bottom: 1px solid var(--line); text-ali
   .logo img { width: 30px; height: 30px; }
   .site-nav { gap: 12px; font-size: 17px; }
   .row { grid-template-columns: 1fr; gap: 0; }
+  .wide-only { display: none; }
+  .narrow-only { display: block; }
 }
 
 @media (max-width: 350px) {

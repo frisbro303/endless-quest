@@ -14,6 +14,12 @@
 
 #let inner(a, b) = $chevron.l #a, #b chevron.r$
 
+// An equation in two layouts: `wide` on computers, `narrow` (line-broken) on phones; see .wide-only/.narrow-only in theme/style.css.
+#let responsive(wide, narrow) = {
+  html.elem("div", attrs: (class: "wide-only"), wide)
+  html.elem("div", attrs: (class: "narrow-only"), narrow)
+}
+
 // The plain text of some content, for alt text; math and other non-text parts are dropped.
 #let plain-text(it) = if type(it) == str { it } else if it.has("text") { it.text } else if it.has("children") {
   it.children.map(plain-text).join()
