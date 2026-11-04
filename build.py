@@ -71,7 +71,7 @@ def search(pattern, page):
 def minutes_to_read(page):
     body = page.partition("<body>")[2]
     text = re.sub(r"<svg.*?</svg>|<[^>]+>", " ", body, flags=re.S)
-    seconds = len(text.split()) * 60 / 140+ 10 * body.count("<svg") + 12 * body.count("<img")
+    seconds = len(text.split()) * 60 / 200 + 5 * body.count("<svg") + 10 * body.count("<img")
     return max(1, math.ceil(seconds / 60))
 
 
