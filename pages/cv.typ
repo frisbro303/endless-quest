@@ -14,6 +14,7 @@
 }
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me], #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu] \
+Website: #link("https://frisbro303.github.io/endless-quest/")[frisbro303.github.io/endless-quest] \
 GitHub: #link("https://github.com/frisbro303")[github.com/frisbro303] \
 ORCID: #link("https://orcid.org/0009-0007-3158-0553")[0009-0007-3158-0553]
 
