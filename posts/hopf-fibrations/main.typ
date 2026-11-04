@@ -59,7 +59,7 @@ $s in [0, 1/2) union (1/2, 1]$, and let $psi(s, t) = (p(s, t), t)$ for $s < 1/2$
 
 
 = The Hopf Fibration
-The Hopf fibration is a fiber bundle with total space $SS^3$, base $SS^2$ and fiber $SS^1$. To see why, we start by finding a continuous surjection from $SS^3$ to $SS^2$ that is locally trivial.
+The Hopf fibration, discovered by Heinz Hopf in 1931, is a fiber bundle with total space $SS^3$, base $SS^2$ and fiber $SS^1$. To see why, we start by finding a continuous surjection from $SS^3$ to $SS^2$ that is locally trivial.
 
 The Hopf map $p : SS^3 -> SS^2$, given by
 #responsive(
