@@ -34,16 +34,13 @@ Supervised by Prof. Ingrid Daubechies.
 = Research Experience
 
 *Landmarks Are Sections: Gaussian Process Landmarking on Fiber Bundles*, Duke University & University of Southern Denmark, 2024 – present \
-I conceived and developed a framework for jointly landmarking shape collections via Gaussian processes defined on fiber bundles. _Manuscript in preparation._
-
-*signDNE: Curvature-Based Surface Measures*, Duke University & University of Southern Denmark, 2024 \
-I co-developed signDNE, a Python package for curvature-based surface measures (ariaDNE and its sign-oriented extension).
+Developing a framework I conceived for jointly landmarking shape collections via Gaussian processes defined on fiber bundles. _Manuscript in preparation._
 
 *Statistical Shape Analysis of _Drosophila_ Wings*, Duke University, University of Chicago & University of Southern Denmark, 2024 – present \
-We use diffusion maps and horizontal diffusion maps to analyze the wing shapes of _Drosophila_ (fruit flies). _Manuscript in preparation._
+Using diffusion maps and horizontal diffusion maps to analyze the wing shapes of _Drosophila_ (fruit flies). _Manuscript in preparation._
 
-*Automated Analysis of Bone Fragment Breakage*, Duke University, University of Minnesota (AMAAZE labs) & University of Southern Denmark, 2025 – present \
-I collaborate on developing and implementing methods, based on statistical shape analysis and topological data analysis, that identify break faces on 3D meshes of bone fragments. Our goal is to investigate whether early hominins were the agents of breakage.
+*Automated Analysis of Bone Fragment Breakage*, Duke University, University of Minnesota (AMAAZE) & University of Southern Denmark, 2025 – present \
+Developing and implementing methods, based on statistical shape analysis and topological data analysis, that identify break faces on 3D meshes of bone fragments. The goal is to investigate whether early hominins were the agents of breakage.
 
 = Research Outputs
 
@@ -53,7 +50,15 @@ I collaborate on developing and implementing methods, based on statistical shape
 
 == Posters
 
-Felix Granum et al. (2026). _Learning the Geometry of Shape Families: A Fiber Bundle Framework_. NITMB workshop #link("https://www.nitmb.org/event/representing-and-learning-morphology-and-shape-dynamics-from-biological-data/")[Representing and Learning Morphology and Shape Dynamics from Biological Data], Chicago, October 2026.
+*Felix Granum* et al. (2026). _Learning the Geometry of Shape Families: A Fiber Bundle Framework_. NITMB workshop #link("https://www.nitmb.org/event/representing-and-learning-morphology-and-shape-dynamics-from-biological-data/")[Representing and Learning Morphology and Shape Dynamics from Biological Data], Chicago, October 2026.
+
+== Software
+
+*HDMaps*, #link("https://github.com/MorphMath/HDMaps")[github.com/MorphMath/HDMaps] \
+Co-developed the Python implementation of horizontal diffusion maps.
+
+*signDNE*, #link("https://github.com/frisbro303/SignDNE")[github.com/frisbro303/SignDNE] \
+Developed a Python package for ariaDNE and its sign-oriented extension.
 
 = Teaching
 
