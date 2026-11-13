@@ -61,7 +61,7 @@ BUNDLE = ["typst", "compile", "--features", "html,bundle", "--format", "bundle"]
 
 
 def build():
-    subprocess.run(["python3", "widgets.py"], cwd=ROOT)
+    subprocess.run(["cargo", "wgw"], cwd=ROOT)
     subprocess.run([*BUNDLE, "site.typ", "_site"], cwd=ROOT)
     subprocess.run([*BUNDLE, "--input", "tdg=pdf", "site.typ", "_site"], cwd=ROOT)
 

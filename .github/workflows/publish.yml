@@ -22,10 +22,22 @@ jobs:
           git clone --depth 1 https://github.com/frisbro303/tdg /tmp/tdg
           mkdir -p ~/.local/share/typst/packages/local/tdg
           cp -R /tmp/tdg/typst ~/.local/share/typst/packages/local/tdg/0.2.0
+      - name: Find wgw's latest commit
+        id: wgw
+        run: echo "commit=$(git ls-remote https://github.com/frisbro303/wgw HEAD | cut -f1)" >> "$GITHUB_OUTPUT"
+      - name: Cache cargo-wgw, built from that commit
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/cargo-wgw
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+          key: cargo-wgw-${{ steps.wgw.outputs.commit }}
       - name: Build the widgets (Rust, compiled to WebAssembly)
         run: |
           rustup target add wasm32-unknown-unknown
-          python3 widgets.py
+          cargo install --git https://github.com/frisbro303/wgw cargo-wgw   # a no-op when the cache has this commit's
+          cargo wgw
       - run: typst compile --features html,bundle --format bundle site.typ _site
       - run: typst compile --features html,bundle --format bundle --input tdg=pdf site.typ _site
       - uses: actions/upload-pages-artifact@v5

@@ -1,8 +1,11 @@
 # The blog's widgets: each a small Rust crate compiled to a WebAssembly module (see wgw's docs), built by
-# widgets.py into its post's folder, where the post's figure loads it.
+# `cargo wgw` (github.com/frisbro303/wgw) into posts/<post>/figures/<name>.wgw, which the post's figure loads.
 [workspace]
 resolver = "2"
 members = ["posts/*/widgets/*"]
+
+[workspace.metadata.wgw]
+out = "../../figures/{dir}.wgw"  # relative to each widget's crate, posts/<post>/widgets/<name>/
 
 [workspace.dependencies]
 wgw-widget = { git = "https://github.com/frisbro303/wgw" }

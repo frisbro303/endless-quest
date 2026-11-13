@@ -1,7 +1,7 @@
 // The blog, built with tdg (github.com/frisbro303/tdg): its widgets first (Rust, compiled to WebAssembly), then
 // the site and its PDFs, each by one Typst compile (a page in both would have each of its labels twice):
 //
-//   python3 widgets.py
+//   cargo wgw   (cargo install --git https://github.com/frisbro303/wgw cargo-wgw)
 //   typst compile --features html,bundle --format bundle site.typ _site
 //   typst compile --features html,bundle --format bundle --input tdg=pdf site.typ _site
 //
