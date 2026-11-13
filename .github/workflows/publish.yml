@@ -21,12 +21,12 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/frisbro303/tdg /tmp/tdg
           mkdir -p ~/.local/share/typst/packages/local/tdg
-          cp -R /tmp/tdg/typst ~/.local/share/typst/packages/local/tdg/0.2.0
+          cp -R /tmp/tdg/typst ~/.local/share/typst/packages/local/tdg/0.1.0
       - name: Find wgw's latest commit
         id: wgw
         run: echo "commit=$(git ls-remote https://github.com/frisbro303/wgw HEAD | cut -f1)" >> "$GITHUB_OUTPUT"
       - name: Cache cargo-wgw, built from that commit
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/bin/cargo-wgw
@@ -40,6 +40,7 @@ jobs:
           cargo wgw
       - run: typst compile --features html,bundle --format bundle site.typ _site
       - run: typst compile --features html,bundle --format bundle --input tdg=pdf site.typ _site
+      - run: typst compile pages/cv.typ _site/about/cv.pdf
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site/

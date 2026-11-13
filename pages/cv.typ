@@ -1,17 +1,9 @@
-#import "/template.typ": *
-#show: standalone.with("cv", title: "Felix Granum – CV", pdf: true, pdf-page: (margin: (x: 2.2cm, y: 1.8cm)))
+// My CV: a plain Typst document. typst compile pages/cv.typ makes its PDF, published at about/cv.pdf; the about
+// page (about.typ) includes it, and lays it out as the website's.
 #set text(size: 10.5pt)
+#show title: set align(center)
 
-// The website opens with a short about before the CV; the PDF is just the CV.
-#context if target() == "paged" {
-  align(center, title())
-} else {
-  [I am Felix Granum, a researcher interested in _mathematics_ and _computing_ with a focus on _shape analysis_. You can read about my thoughts and ideas on my #link("../")[blog].]
-  parbreak()
-  [My CV is available below or in #html.elem("a", attrs: (href: "cv.pdf", download: ""))[PDF form].]
-  parbreak()
-  html.elem("h1")[Curriculum Vitae]
-}
+#title[Felix Granum – Curriculum Vitae]
 
 Email: #link("mailto:felix.granum@pm.me")[felix.granum\@pm.me], #link("mailto:felix.granum@duke.edu")[felix.granum\@duke.edu] \
 Website/Blog: #link("https://frisbro303.github.io/endless-quest/")[frisbro303.github.io/endless-quest] \

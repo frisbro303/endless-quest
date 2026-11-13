@@ -134,8 +134,8 @@ checksum = "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563"
 
 [[package]]
 name = "wgw-scene"
-version = "0.2.0"
-source = "git+https://github.com/frisbro303/wgw#d5e77504f0fa38e264878ff2bf6619421e877367"
+version = "0.1.0"
+source = "git+https://github.com/frisbro303/wgw#7839ac4b65f0528eeae3a7dff6f06586122620d5"
 dependencies = [
  "bytemuck",
  "glam",
@@ -146,7 +146,7 @@ dependencies = [
 [[package]]
 name = "wgw-widget"
 version = "0.1.0"
-source = "git+https://github.com/frisbro303/wgw#d5e77504f0fa38e264878ff2bf6619421e877367"
+source = "git+https://github.com/frisbro303/wgw#7839ac4b65f0528eeae3a7dff6f06586122620d5"
 dependencies = [
  "serde_json",
  "wgw-scene",

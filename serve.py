@@ -56,7 +56,8 @@ def serve():
     print(f"Serving on http://localhost:{PORT}/")
 
 
-# The widgets, then the site and its PDFs: two compiles, since a page in both would have each of its labels twice.
+# The widgets, then the site and its posts' PDFs (two compiles, since a page in both would have each of its labels
+# twice), and the CV's PDF.
 BUNDLE = ["typst", "compile", "--features", "html,bundle", "--format", "bundle"]
 
 
@@ -64,6 +65,7 @@ def build():
     subprocess.run(["cargo", "wgw"], cwd=ROOT)
     subprocess.run([*BUNDLE, "site.typ", "_site"], cwd=ROOT)
     subprocess.run([*BUNDLE, "--input", "tdg=pdf", "site.typ", "_site"], cwd=ROOT)
+    subprocess.run(["typst", "compile", "pages/cv.typ", "_site/about/cv.pdf"], cwd=ROOT)
 
 
 def main():
