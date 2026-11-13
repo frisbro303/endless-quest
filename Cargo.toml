@@ -1,0 +1,15 @@
+# The blog's widgets: each a small Rust crate compiled to a WebAssembly module (see wgw's docs), built by
+# widgets.py into its post's folder, where the post's figure loads it.
+[workspace]
+resolver = "2"
+members = ["posts/*/widgets/*"]
+
+[workspace.dependencies]
+wgw-widget = { git = "https://github.com/frisbro303/wgw" }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"

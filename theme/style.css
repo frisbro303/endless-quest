@@ -10,6 +10,7 @@
   --link: #205ea6;
   --accent: #bc5215;
   --surface: #dad8ce;
+  --red: #af3029;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --width: 680px;
 }
@@ -25,6 +26,7 @@
   --link: #4385be;
   --accent: #da702c;
   --surface: #403e3c;
+  --red: #d14d41;
 }
 
 * { box-sizing: border-box; }
@@ -177,6 +179,9 @@ article strong { font-weight: 600; }
 article img, article svg { max-width: 100%; height: auto; }
 figure { margin: 24px 0; }
 figure img, figure svg { display: block; margin: 0 auto; }
+.wgw { --wgw-colors: var(--surface), var(--red); --wgw-accent: var(--text); --wgw-edge: rgba(16, 15, 15, 0.1); --wgw-height: 420px; }
+[data-theme="dark"] .wgw { --wgw-edge: rgba(255, 252, 240, 0.08); }
+.wgw-controls { color: var(--muted); font-family: var(--mono); --wgw-control: var(--text); }
 figcaption { margin-top: 6px; color: var(--muted); font-size: 16px; text-align: center; }
 
 /* Plots and transparent images are drawn for a light page. */

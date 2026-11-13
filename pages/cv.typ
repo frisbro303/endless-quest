@@ -1,5 +1,5 @@
-#set document(title: "Felix Granum – CV", author: "Felix Granum")
-#set page(margin: (x: 2.2cm, y: 1.8cm))
+#import "/template.typ": *
+#show: standalone.with("cv", title: "Felix Granum – CV", pdf: true, pdf-page: (margin: (x: 2.2cm, y: 1.8cm)))
 #set text(size: 10.5pt)
 
 // The website opens with a short about before the CV; the PDF is just the CV.

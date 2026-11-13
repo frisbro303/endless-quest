@@ -1,9 +1,5 @@
-#set document(
-  title: "Fiber Bundles and the Hopf Fibration",
-  description: "I discuss fiber bundles, with the beautiful Hopf fibration as a special case.",
-)
-
 #import "/template.typ": *
+#show: post.with("hopf-fibrations", title: "Fiber Bundles and the Hopf Fibration", date: "2026-11-03", updated: "2026-11-12", description: "I discuss fiber bundles, with the beautiful Hopf fibration as a special case.")
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
 
 The logo image of this website is a visualization of the Hopf fibration.
@@ -12,18 +8,18 @@ With this in mind, it is only right that my first post should be about fiber bun
 I will try to give a bare-bones intuitive picture, even though both fiber bundles and the Hopf fibration are much, much deeper than what is presented here.
 The exposition will roughly follow the Wikipedia articles on #link("https://en.wikipedia.org/wiki/Fiber_bundle")[fiber bundles] and the #link("https://en.wikipedia.org/wiki/Hopf_fibration")[Hopf fibration].
 
-#themed-gif(
-  "figures/Hook",
-  [The Hopf fibration of $SS^3$, drawn after stereographic projection to $RR^3$.],
+#widget(
+  path("figures/hook.wgw"), view: (-30, 55), pick: "none",
+  caption: [The Hopf fibration of $SS^3$, drawn after stereographic projection to $RR^3$.#web[ Drag to turn it.]],
 ) <fig:hook>
 
 = Fiber Bundles
 A fiber bundle is a space that is locally a product space. A familiar example is the cylinder, which is formed by gluing an interval to each point in a circle, that is $SS^1 times [-1, 1]$.
 The cylinder is a kind of non-example in that it is not only locally a product space, but in fact globally one. The simplest example of a non-trivial fiber bundle is the Möbius band. Locally it looks like we are doing the exact same gluing of an interval to a circle, but globally it is not a product. @fig:bundles shows this difference.
 
-#themed-gif(
-  "figures/Bundles",
-  [Two distinct bundles over the circle with interval fibers: the cylinder (left side), which is a product globally, and the Möbius band (right side), which is a product only locally.],
+#widget(
+  path("figures/bundles.wgw"), view: (-90, 28, 1.7), pick: "none", height: "380px",
+  caption: [Two distinct bundles over the circle with interval fibers: the cylinder (left side), which is a product globally, and the Möbius band (right side), which is a product only locally.#web[ The slider grows the fibers out of the circles.]],
 ) <fig:bundles>
 
 When thinking about fiber bundles I am reminded of the following quote.
@@ -37,12 +33,13 @@ In the same spirit: to deal with a non-trivial fiber bundle, picture the Möbius
 Now make sure you are sitting down, because here comes the rather technical definition of a fiber bundle.
 #definition(title: "Fiber bundle")[
   A _fiber bundle_ with base $B$ and fiber $F$ is a continuous surjection $p: E -> B$ such that every point of $B$ has an open neighborhood $U$ with a homeomorphism $phi: p^(-1)(U) -> U times F$ making the diagram commute:
-  #html.elem("div", attrs: (class: "diagram"), html.frame(text(size: 14pt, diagram(
+  #let commutes = text(size: 14pt, diagram(
     $
       p^(-1)(U) edge("rr", phi, ->) edge("dr", p, ->, label-side: #right) &   & U times F edge("dl", "pr"_1, ->) \
                                                                           & U &
     $,
-  ))))
+  ))
+  #context if target() == "html" { html.elem("div", attrs: (class: "diagram"), html.frame(commutes)) } else { align(center, commutes) }
 ]
 
 In other words, every point of $B$ has a neighborhood $U$ over which $E$ looks like the product $U times F$. Commuting with the projections means $phi$ keeps track of where on the base we are: a point above $u in U$ is sent to $(u, f)$ for some $f in F$. This property is referred to as local triviality.
@@ -200,9 +197,9 @@ where $tilde.equiv$ means homeomorphic. The same holds for $y in V$ using $psi$.
 
 @fig:hopf shows the preimages $p^(-1)(y) subset SS^3$ of points $y in SS^2$, each a copy of $SS^1$, drawn in $RR^3$ by stereographic projection. I will hopefully get around to covering the stereographic projection another time.
 
-#themed-gif(
-  "figures/HopfMap",
-  [The Hopf map $p$. The preimage of each point of $SS^2$ is a circle in $SS^3$, drawn here after stereographic projection to $RR^3$.],
+#widget(
+  path("figures/hopf-map.wgw"), view: (-70, 32),
+  caption: [The Hopf map $p$ takes $SS^3$ (left, drawn after stereographic projection to $RR^3$) to $SS^2$ (right). The preimage of each point of $SS^2$ is a circle in $SS^3$, and any two of these circles are linked.#web[ Click a point of $SS^2$ to add the circle over it. Each point travels round its circle of latitude, and the circle over it sweeps out a torus.]],
 ) <fig:hopf>
 
 The logo image is the same kind of projection as @fig:hook, only viewed from above with a different color scheme.

@@ -14,12 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0 # post dates come from git history
       - uses: typst-community/setup-typst@v5
         with:
           typst-version: 0.15.0
-      - run: python3 build.py
+      - name: Install tdg (github.com/frisbro303/tdg) as @local/tdg
+        run: |
+          git clone --depth 1 https://github.com/frisbro303/tdg /tmp/tdg
+          mkdir -p ~/.local/share/typst/packages/local/tdg
+          cp -R /tmp/tdg/typst ~/.local/share/typst/packages/local/tdg/0.2.0
+      - name: Build the widgets (Rust, compiled to WebAssembly)
+        run: |
+          rustup target add wasm32-unknown-unknown
+          python3 widgets.py
+      - run: typst compile --features html,bundle --format bundle site.typ _site
+      - run: typst compile --features html,bundle --format bundle --input tdg=pdf site.typ _site
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site/

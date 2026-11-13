@@ -2,4 +2,6 @@ _site/
 __pycache__/
 .DS_Store
 media/
-posts/*/figures/*.py
+.cache/
+target/
+posts/*/figures/*.wgw
