@@ -9,7 +9,7 @@ I will try to give a bare-bones intuitive picture, even though both fiber bundle
 The exposition will roughly follow the Wikipedia articles on #link("https://en.wikipedia.org/wiki/Fiber_bundle")[fiber bundles] and the #link("https://en.wikipedia.org/wiki/Hopf_fibration")[Hopf fibration].
 
 #widget(
-  path("figures/hook.wgw"), view: (-30, 55), pick: "none",
+  path("figures/hook.wgw"), view: (-30, 89), pick: "none",  // seen from above
   caption: [The Hopf fibration of $SS^3$, drawn after stereographic projection to $RR^3$.#web[ Drag to turn it.]],
 ) <fig:hook>
 

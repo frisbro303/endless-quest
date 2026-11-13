@@ -129,11 +129,17 @@ impl Widget for HopfMap {
             bases.push(on_sphere(polar, longitude));
             shades.push(shade(longitude));
         }
-        Scene::new()
-            .layer("mesh", sphere())
-            .layer("grid", graticule())
-            .layer("fibreFrame", frame(REACH, 0))
-            .layer("sphereFrame", frame(2.0, 1))
+        // S^2, its grid and the panes' frames never change: given with frame 0 only, they stay for every frame.
+        let scene = if state.frame == 0 {
+            Scene::new()
+                .layer("mesh", sphere())
+                .layer("grid", graticule())
+                .layer("fibreFrame", frame(REACH, 0))
+                .layer("sphereFrame", frame(2.0, 1))
+        } else {
+            Scene::new()
+        };
+        scene
             .layer("fibres", Lines::new(vertices).segments(segments).values(values).colors(&COLORS).width(2.5))
             .layer("points", Points::new(bases).values(shades).colors(&COLORS).size(9.0).pickable(false).pane(1))
     }
