@@ -16,6 +16,7 @@ def build():
         package = re.search(r'^name = "(.+)"', manifest.read_text(), re.M).group(1)
         built = ROOT / "target/wasm32-unknown-unknown/release" / (package.replace("-", "_") + ".wasm")
         out = manifest.parents[2] / "figures" / (manifest.parent.name + ".wgw")
+        out.parent.mkdir(exist_ok=True)
         shutil.copyfile(built, out)
         print(f"{out.relative_to(ROOT)}: {out.stat().st_size // 1024} KB")
 
