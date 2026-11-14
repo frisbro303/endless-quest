@@ -46,12 +46,12 @@ fn fibres(twist: f32, at: f32, height: f32, color: &str) -> Layer {
         let u = TAU * k as f32 / FIBRES as f32;
         vertices.extend([band(u, -1.0, twist, at, height), band(u, 1.0, twist, at, height)]);
     }
-    let segments = (0..FIBRES as u32).map(|k| [2 * k, 2 * k + 1]).collect();
+    let segments: Vec<[u32; 2]> = (0..FIBRES as u32).map(|k| [2 * k, 2 * k + 1]).collect();
     Lines::new(vertices).segments(segments).color(color).width(1.5)
 }
 
 fn circle(at: f32, color: &str) -> Layer {
-    let vertices = (0..=NU).map(|i| band(TAU * i as f32 / NU as f32, 0.0, 0.0, at, 0.0)).collect();
+    let vertices: Vec<[f32; 3]> = (0..=NU).map(|i| band(TAU * i as f32 / NU as f32, 0.0, 0.0, at, 0.0)).collect();
     Lines::new(vertices).color(color).width(2.2)
 }
 
